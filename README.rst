@@ -1,7 +1,7 @@
 UCloud authentication for the awesome requests!
 -----------------------------------------------
 
-.. image:: https://travis-ci.org/SkyLothar/requests-ucloud?branch=master
+.. image:: https://travis-ci.org/SkyLothar/requests-ucloud.svg?branch=master
     :target: https://travis-ci.org/SkyLothar/requests-ucloud
 
 .. image:: https://coveralls.io/repos/SkyLothar/requests-ucloud/badge.png
