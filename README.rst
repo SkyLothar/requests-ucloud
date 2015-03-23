@@ -1,7 +1,6 @@
 UCloud authentication for the awesome requests!
 -----------------------------------------------
 
-
 .. image:: https://travis-ci.org/SkyLothar/requests-ucloud?branch=master
     :target: https://travis-ci.org/SkyLothar/requests-ucloud
 
@@ -56,3 +55,9 @@ Or set the auth attribute to the session object
     ...     params=dict(SomeParams="SomeValue")
     ... )
     <Response [200]>
+    
+UCloud API
+----------
+View full `UCloud API`_
+
+.. _UCloud API: http://docs.ucloud.cn/api/apilist.html
