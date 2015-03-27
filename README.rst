@@ -72,7 +72,8 @@ UFile Object Auth
     ...     "private-key",
     ...     expires=None,  # for signing in url, expires is unix `timestamp`
     ...     expires_in=None,  # for signing in url, expires in `x` seconds
-    ...     allow_empty_md5=False  # if your request has no content-md5, UFileAuth will calculate for you, set to `True` to disable this function
+    ...     allow_empty_md5=False  # if no content-md5 was provided, UFileAuth will calculate for you
+    ...     # set to `True` to disable this function
     ... )
     >>> req = session.put(
     ...     "http://bucket-name.ufile.ucloud.cn/test-key.txt",
