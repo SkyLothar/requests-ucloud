@@ -31,6 +31,9 @@ How to Use
 ----------
 Just pass the auth object to requests
 
+Common UCloud Auth
+^^^^^^^^^^^^^^^^^^
+
 .. code-block:: python
 
     >>> import requests
@@ -53,6 +56,27 @@ Or set the auth attribute to the session object
     >>> req = session.get(
     ...     "https://api.ucloud.cn/",
     ...     params=dict(SomeParams="SomeValue")
+    ... )
+    <Response [200]>
+
+UFile Object Auth
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    >>> import requests
+    >>> from ucloudauth import UFile
+    >>> session = requests.session()
+    >>> session.auth = UFileAuth(
+    ...     "public-key",
+    ...     "private-key",
+    ...     expires=None,  # for signing in url, expires is unix `timestamp`
+    ...     expires_in=None,  # for signing in url, expires in `x` seconds
+    ...     allow_empty_md5=False  # if your request has no content-md5, UFileAuth will calculate for you, set to `True` to disable this function
+    ... )
+    >>> req = session.put(
+    ...     "http://bucket-name.ufile.ucloud.cn/test-key.txt",
+    ...     data="test-data"
     ... )
     <Response [200]>
 
