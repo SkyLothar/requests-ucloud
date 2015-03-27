@@ -55,9 +55,14 @@ Or set the auth attribute to the session object
     ...     params=dict(SomeParams="SomeValue")
     ... )
     <Response [200]>
-    
+
 UCloud API
 ----------
 View full `UCloud API`_
 
+UFile API
+----------
+View full `UFile API`_
+
 .. _UCloud API: http://docs.ucloud.cn/api/apilist.html
+.. _UFile API: http://docs.ucloud.cn/api/ufile/index.html
