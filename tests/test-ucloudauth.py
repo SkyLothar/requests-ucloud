@@ -1,6 +1,10 @@
-from nose.tools import eq_
+# -*- coding:utf8 -*-
+
 import requests
+
+from nose.tools import eq_
 from requests.compat import urlparse
+
 
 if requests.compat.is_py2:
     from urlparse import parse_qsl
