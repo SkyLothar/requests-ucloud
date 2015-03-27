@@ -7,7 +7,7 @@ ucloudauth
 This module contains the authentication handlers for UCloud Service
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "SkyLothar"
 __email__ = "allothar@gmail.com"
 __url__ = "http://github.com/skylothar/requests-ucloud"
