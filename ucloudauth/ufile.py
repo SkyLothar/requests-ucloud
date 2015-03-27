@@ -147,15 +147,10 @@ class UFileAuth(requests.auth.AuthBase):
             logger.debug("calculating content-md5")
             content, content_md5 = utils.cal_content_md5(req.body)
             req.body = content
+            req.headers["content-md5"] = content_md5
+            logger.debug("new content-md5 is: {0}".format(content_md5))
         else:
             logger.debug("skip content-md5 calculation")
-            content_md5 = None
-        logger.debug(
-            "origin content-md5 is: {0}, new content-md5 is: {1}".format(
-                req.headers.get("content-md5"), content_md5
-            )
-        )
-        req.headers.setdefault("content-md5", content_md5)
 
         if self._expires is None:
             req.headers.setdefault(

@@ -54,7 +54,7 @@ class TestUFileAuth(object):
             "public-key", "private-key", allow_empty_md5=True
         )
         empty_md5_req = empty_md5_auth.fill_all_headers(request)
-        eq_(empty_md5_req.headers["Content-Md5"], None)
+        eq_(empty_md5_req.headers.get("Content-Md5"), None)
 
     def test_header_no_md5(self):
         request = self.request.prepare()
