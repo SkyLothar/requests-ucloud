@@ -31,6 +31,28 @@ How to Use
 ----------
 Just pass the auth object to requests
 
+Omni API Auth
+^^^^^^^^^^^^^
+For common api and ufile authentication
+
+.. code-block:: python
+
+   >>> import requests
+   >>> from ucloudauth import UCloudOmniAuth
+   >>> session = reqeusts.session()
+   >>> session.auth = UCloudOmniAuth("public-key", "private-key")
+   >>> session.get(
+   ...     "http://api.ucloud.cn",
+   ...     params=dict(Action="SomeAction")  # demo of common api
+   ... )
+   <Response [200]>
+   >>> session.put(
+   ...     "http://bucket.ufile.ucloud.cn/key",
+   ...     data="test-data"  # demo of ufile api
+   ... )
+   <Response [200]>
+
+
 Common UCloud Auth
 ^^^^^^^^^^^^^^^^^^
 
@@ -38,26 +60,13 @@ Common UCloud Auth
 
     >>> import requests
     >>> from ucloudauth import UCloudAuth
-    >>> req = requests.get(
+    >>> requests.get(
     ...     "https://api.ucloud.cn/",
     ...     params=dict(SomeParams="SomeValue"),
     ...     auth=UCLoudAuth("public-key", "private-key")
     ... )
     <Response [200]>
 
-Or set the auth attribute to the session object
-
-.. code-block:: python
-
-    >>> import requests
-    >>> from ucloudauth import UCloudAuth
-    >>> session = requests.session()
-    >>> session.auth = UCloudAuth("public-key", "private-key")
-    >>> req = session.get(
-    ...     "https://api.ucloud.cn/",
-    ...     params=dict(SomeParams="SomeValue")
-    ... )
-    <Response [200]>
 
 UFile Object Auth
 ^^^^^^^^^^^^^^^^^
@@ -80,6 +89,19 @@ UFile Object Auth
     ...     data="test-data"
     ... )
     <Response [200]>
+    >>> url_auth = UFileAuth(
+    ...     "public-key",
+    ...     "private-key",
+    ...     expires=None,  # for signing in url, expires is unix `timestamp`
+    ...     expires_in=10,  # for signing in url, expires in 10 seconds
+    ... )
+    >>> req = requests.Request(
+    ...     "GET",  # http method
+    ...     "http://bucket-name.ufile.ucloud.cn/test-key.txt",  # url
+    ...     auth=url_auth
+    ... )
+    >>> req.prepare().url
+    "http://bucket-name.ufile.cloud.cn/test-key.txt?Signature&Other&Params"
 
 UCloud API
 ----------
