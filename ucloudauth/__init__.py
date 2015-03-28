@@ -7,12 +7,28 @@ ucloudauth
 This module contains the authentication handlers for UCloud Service
 """
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 __author__ = "SkyLothar"
 __email__ = "allothar@gmail.com"
 __url__ = "http://github.com/skylothar/requests-ucloud"
 
-__all__ = ["UCloudAuth", "UFileAuth"]
+__all__ = ["UCloudOmniAuth", "UCloudAuth", "UFileAuth"]
 
 from .common_sign import UCloudAuth
 from .ufile import UFileAuth
+
+import requests
+
+
+class UCloudOmniAuth(requests.auth.AuthBase):
+    def __init__(self, public_key, private_key):
+        self._ucloud_auth = UCloudAuth(public_key, private_key)
+        self._ufile_auth = UFileAuth(public_key, private_key)
+
+    def __call__(self, req):
+        """Sign the request"""
+        url = requests.compat.urlsplit(req.url)
+        if url.netloc.endswith(".ufile.ucloud.cn"):
+            return self._ufile_auth(req)
+        else:
+            return self._ucloud_auth(req)
