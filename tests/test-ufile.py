@@ -35,7 +35,7 @@ x-ucloud-1:1/bucket-name/key.html
 AUTHORIZATION = "UCloud public-key:vex1mk5WI2fe/i5TzXm7QY19p64="
 PARAMS = dict(
     UCloudPublicKey="public-key",
-    Signature="JHrQ1u087Gv0ktLlBAyfYclnI/I=",
+    Signature="i85wNCWK1eotra5GWAF9WfHfjsY=",
     Expires="1"
 )
 
