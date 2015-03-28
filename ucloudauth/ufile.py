@@ -123,7 +123,7 @@ class UFileAuth(requests.auth.AuthBase):
         str_to_sign = "\n".join([
             req.method,
             req.headers.get("content-md5", ""),
-            req.headers["content-type"],
+            req.headers.get("content-type", ""),
             req.headers.get("date", self._expires),
             canonicalized_headers + canonicalized_resource
         ])
@@ -137,7 +137,9 @@ class UFileAuth(requests.auth.AuthBase):
         if content_type is None:
             content_type = self.DEFAULT_TYPE
             logger.warn("can not determine mime-type for {0}".format(url.path))
-        req.headers.setdefault("content-type", content_type)
+        if self._expires is None:
+            # sign with url, no content-type for url
+            req.headers.setdefault("content-type", content_type)
 
         if (
             req.body is not None
