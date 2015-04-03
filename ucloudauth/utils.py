@@ -43,7 +43,6 @@ def cal_content_md5(content):
         io_content = io.BytesIO()
         for partial in content:
             data_piece = to_bytes(partial)
-            print("###: {0}|{1}".format(partial, data_piece))
             io_content.write(data_piece)
             md5_hash.update(data_piece)
         content = io_content
