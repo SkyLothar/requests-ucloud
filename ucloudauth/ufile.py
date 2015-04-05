@@ -101,6 +101,12 @@ class UFileAuth(requests.auth.AuthBase):
                 self._public_key, signature
             )
 
+        # remove empty header
+        for key, val in req.headers.copy().items():
+            if not val:
+                logger.debug("deleting empty header key: {0}".format(key))
+                del req.headers[key]
+
         return req
 
     def gen_str_to_sign(self, req):
