@@ -7,7 +7,7 @@ ucloudauth
 This module contains the authentication handlers for UCloud Service
 """
 
-__version__ = "0.2.2"
+__version__ = "0.3.0"
 __author__ = "SkyLothar"
 __email__ = "allothar@gmail.com"
 __url__ = "http://github.com/skylothar/requests-ucloud"
@@ -28,7 +28,8 @@ class UCloudOmniAuth(requests.auth.AuthBase):
     def __call__(self, req):
         """Sign the request"""
         url = requests.compat.urlsplit(req.url)
-        if url.netloc.endswith(".ufile.ucloud.cn"):
+        u_host = url.netloc.split(".", 1)[1]
+        if u_host.startswith("ufile.") and u_host.endswith(".ucloud.cn"):
             return self._ufile_auth(req)
         else:
             return self._ucloud_auth(req)
