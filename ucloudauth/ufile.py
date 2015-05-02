@@ -16,7 +16,7 @@ import time
 import logging
 
 import requests
-from requests.compat import urlencode, urlsplit
+from requests.compat import unquote, urlencode, urlsplit
 
 if requests.compat.is_py2:
     from urlparse import parse_qsl
@@ -124,7 +124,10 @@ class UFileAuth(requests.auth.AuthBase):
             "{0}:{1}".format(k, v) for k, v in ucloud_headers
         ])
 
-        canonicalized_resource = "/{0}{1}".format(bucket_name, url.path)
+        canonicalized_resource = "/{0}{1}".format(
+            bucket_name,
+            unquote(url.path)
+        )
 
         str_to_sign = "\n".join([
             req.method,

@@ -30,12 +30,12 @@ PUT
 text/html
 test-time
 x-ucloud-0:2
-x-ucloud-1:1/bucket-name/key.html
+x-ucloud-1:1/bucket-name/with blank key.html
 """.format(DATA_MD5).strip()
-AUTHORIZATION = "UCloud public-key:vex1mk5WI2fe/i5TzXm7QY19p64="
+AUTHORIZATION = "UCloud public-key:/gwrk38YkvtudZZa0BNMbJSVZco="
 PARAMS = dict(
     UCloudPublicKey="public-key",
-    Signature="i85wNCWK1eotra5GWAF9WfHfjsY=",
+    Signature="0mJh0bJCJQ+1O9/FguUVH4f3pNs=",
     Expires="1"
 )
 
@@ -44,8 +44,8 @@ class TestUFileAuth(object):
     def setup(self):
         self.auth = UFileAuth("public-key", "private-key")
         self.request = requests.Request(
-            "PUT", "http://bucket-name.ufile.ucloud.cn/key.html", data=DATA,
-            headers=HEADERS
+            "PUT", "http://bucket-name.ufile.ucloud.cn/with blank key.html",
+            data=DATA, headers=HEADERS
         )
 
     def test_headers_empty_md5(self):
